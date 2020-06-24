@@ -1,0 +1,12 @@
+<div class="container mt-3">
+  <div class="row">
+      <div class="card col-3" *ngFor="let discount of arrayDiscounts">
+        <img class="card-img-top" src="https://www.lapiec-pizza.com.ua/wp-content/uploads/2019/10/bring-a-friend-small.jpg" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{ discount.title }}</h5>
+          <p class="card-text">{{ discount.text }}</p>
+          <a class="btn btn-primary" [routerLink]="[ '/discount', discount.id ]">Скористатися</a>
+        </div>
+      </div>
+  </div>
+</div>

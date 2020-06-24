@@ -1,0 +1,116 @@
+<h3 class="text-center mt-2 mb-2">Admin products</h3>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="form-row">
+        <div class="col-10">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <div class="col-2">
+          <input type="button" class="btn btn-success" value="ADD" (click)="openModal(template)">
+        </div>
+      </div>
+    </div>
+    <div class="col-12 mt-3">
+      <table class="table">
+        <thead>
+          <th>#</th>
+          <th>Category</th>
+          <th>Name UA</th>
+          <th>Name EN</th>
+          <th>Description</th>
+          <th>Weight</th>
+          <th>Price</th>
+          <th>Image</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </thead>
+        <tbody>
+          <!-- <tr *ngFor="let product of adminProducts; let i=index"> -->
+            <tr *ngFor="let product of cloudProducts; let i=index">
+            <td>{{ i+1 }}</td>
+            <td>{{ product.category.nameUA }}</td>
+            <td>{{ product.nameUA }}</td>
+            <td>{{ product.nameEN }}</td>
+            <td>{{ product.description }}</td>
+            <td>{{ product.weight }}</td>
+            <td>{{ product.price }}</td>
+            <td>image</td>
+            <td>
+              <button type="button" class="btn btn-warning" (click)="editProduct(template, product)">Edit</button>
+            </td>
+            <td>
+              <!-- <button type="button" class="btn btn-danger" (click)="deleteProduct(product)">Delete</button> -->
+              <button type="button" class="btn btn-danger" (click)="deleteCloudProduct(product)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">
+        <span *ngIf="!editStatus">Add product modal</span>
+        <span *ngIf="editStatus">Edit product modal</span>
+    </h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <!-- <div class="form-group">
+        <label for="categorySelect">Select category:</label>
+        <select class="form-control" id="categorySelect" [(ngModel)]="categoryName" (change)="setCategory()" name="categorySelect">
+          <option disabled selected>Choose category</option>
+            <option *ngFor="let item of adminCategories;">
+            {{item.nameEN | titlecase}}</option>
+        </select>
+      </div> -->
+      <div class="form-group">
+        <label for="categorySelect">Select category:</label>
+        <select class="form-control" id="categorySelect" [(ngModel)]="categoryName" (change)="setCategory()" name="categorySelect">
+          <option disabled selected>Choose category</option>
+            <option *ngFor="let item of cloudCategories;">
+            {{item.nameEN | titlecase}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="en">Name UA:</label>
+        <input type="text" class="form-control" id="en" placeholder="Enter name en" [(ngModel)]="productNameUA" name="productNameUA">
+      </div>
+      <div class="form-group">
+        <label for="ua">Name EN:</label>
+        <input type="text" class="form-control" id="ua" placeholder="Enter name ua" [(ngModel)]="productNameEN" name="productNameEN">
+      </div>
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <input type="text" class="form-control" id="description" placeholder="Enter description" [(ngModel)]="productDescription" name="productDescription">
+      </div>
+      <div class="form-group">
+        <label for="weight">Weight:</label>
+        <input type="text" class="form-control" id="weight" placeholder="Enter weight" [(ngModel)]="productWeight" name="productWeight">
+      </div>
+      <div class="form-group">
+        <label for="price">Price:</label>
+        <input type="number" class="form-control" id="price" placeholder="Enter price" [(ngModel)]="productPrice" name="productPrice">
+      </div>
+      <div class="custom-file">
+        <input (change)="uploadFile($event)" type="file" class="custom-file-input" id="validatedCustomFile" required>
+        <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+      </div>
+      <div class="progress mt-3 mb-3">
+        <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
+          [style.width]="(uploadProgress | async) + '%'" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+      <!-- <button *ngIf="!editStatus" type="button" class="btn btn-success" (click)="addProduct()">ADD</button> -->
+      <button *ngIf="!editStatus" type="button" class="btn btn-success" (click)="addCloudProduct()">ADD</button>
+      <!-- <button *ngIf="editStatus" type="button" class="btn btn-success" (click)="saveEditProduct()">Save</button> -->
+      <button *ngIf="editStatus" type="button" class="btn btn-success" (click)="saveCloudProduct()">Save</button>
+    </form>
+  </div>
+</ng-template>

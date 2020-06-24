@@ -1,0 +1,62 @@
+<h3 class="text-center mt-2 mb-2">Admin discount</h3>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="form-row">
+        <div class="col-10">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <div class="col-2">
+          <input type="button" class="btn btn-success" value="ADD" (click)="openModal(template)">
+        </div>
+      </div>
+    </div>
+    <div class="col-12 mt-3">
+      <table class="table">
+        <thead>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Text</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let d of arrayDiscounts; let i=index">
+            <td>{{ d.id }}</td>
+            <td>{{ d.title }}</td>
+            <td>{{ d.text }}</td>
+            <td>
+              <button type="button" class="btn btn-warning" (click)="editDiscount(template, d)">Edit</button>
+            </td>
+            <td>
+              <button type="button" class="btn btn-danger" (click)="deleteDiscount(d)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Modal</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="title">title</label>
+        <input type="text" class="form-control" id="title" placeholder="Enter title" [(ngModel)]="title" name="title">
+      </div>
+      <div class="form-group">
+        <label for="text">text</label>
+        <input type="text" class="form-control" id="text" placeholder="Enter text" [(ngModel)]="text" name="text">
+      </div>
+      <button *ngIf="!editStatus" type="button" class="btn btn-success" (click)="addDiscount()">ADD</button>
+      <button *ngIf="editStatus" type="button" class="btn btn-success" (click)="saveEditDiscount()">Save</button>
+    </form>
+  </div>
+</ng-template>

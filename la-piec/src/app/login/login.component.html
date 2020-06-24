@@ -1,0 +1,13 @@
+<p>login works!</p>
+<form class="col-2">
+    <div class="form-group">
+      <label for="login">Login:</label>
+      <input type="text" class="form-control" id="login" placeholder="login here .." [(ngModel)]="login" name="login">
+    </div>
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="text" class="form-control" id="password" placeholder="password here .." [(ngModel)]="password" name="password">
+    </div>
+    <button class="btn btn-success" (click)="signIn()">signIn</button>
+    <button class="btn btn-info" (click)="signUp()">signUp</button>
+</form>
